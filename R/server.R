@@ -29,7 +29,7 @@ server <- function(input, output, session) {
   })
   output$ui.questionnaire<-renderUI({
     if(input$action%!in%c(NULL,"")){
-      shiny::fileInput("questionnaire", "Questionnaire EXCEL workbook", accept = c(".xlsx",".xls"))
+      shiny::fileInput("questionnaire", "EXCEL workbook questionnaire", accept = c(".xlsx",".xls"))
     }
   })
   output$ui.choiceslabel<-renderUI({
