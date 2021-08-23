@@ -1,18 +1,6 @@
 server <- function(input, output, session) {
 
-  library(dplyr)
-  library(lubridate)
-  library(purrr)
-  library(readr)
-  library(readxl)
   library(shiny)
-  library(composr)
-  library(stringr)
-  library(stringi)
-  library(shinyjs)
-  library(rlang)
-  library(writexl)
-  library(openxlsx)
 
   shinyjs::disable("dwclog")
   shinyjs::disable("dwclean")

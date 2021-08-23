@@ -36,10 +36,7 @@ ui <- shiny::fluidPage(
     shiny::mainPanel(
       shiny::conditionalPanel(condition="$('html').hasClass('shiny-busy')",
                               shiny::tags$div("Loading...",id="loadmessage")),
-      p("Welcome to Sudan MSNA shiny app. This tool was developed to make the typical workflow of AO's,
-        IM Officers smoother and less complicated. The app will help users run their data checks and
-        clean the data in a more efficient and automated way.
-        No need for strong R background and technical capacities."),
+      p("Welcome to Sudan MSNA shiny app. This tool was developed to make the typical workflow of AO's, IM Officers smoother and less complicated. The app will help users run their data checks and clean the data in a more efficient and automated way. No need for strong R background and technical capacities."),
       p("What this app will do for you."),
       p("1/ Produce a Cleaning LOG"),
       p("2/ Clean DATA"),
