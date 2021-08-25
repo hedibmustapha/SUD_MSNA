@@ -1,6 +1,11 @@
 server <- function(input, output, session) {
-
   library(shiny)
+  library(shinyjs)
+  library(dplyr)
+  library(composr)
+  library(readr)
+  library(stringr)
+  library(stringi)
 
   shinyjs::disable("dwclog")
   shinyjs::disable("dwclean")

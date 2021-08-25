@@ -46,6 +46,8 @@ other_check<-function(dbs,survey){
   cleantemplate<-data.frame(
     date=c(),
     enumerator= c(),
+    state= c(),
+    locality= c(),
     uuid= c(),
     question.name = c(),
     original.value = c(),
@@ -72,6 +74,8 @@ other_check<-function(dbs,survey){
       ds<-data.frame(
         date=as.character(dbs[["date"]][indexoth]),
         enumerator=dbs[["enumerator_name"]][indexoth],
+        state=dbs[["assessment_state"]][indexoth],
+        locality=dbs[["assessment_locality"]][indexoth],
         uuid=dbs[["uuid"]][indexoth],
         question.name=rep(names(dbs)[k],length(indexoth)),
         original.value=dbs[indexoth,k],
@@ -158,6 +162,8 @@ makeslog<-function(data,logbook,checkid="empty",index,question.name,explanation,
     newlog<-data.frame(
       date=as.character(data$date[data$uuid%in%index]),
       enumerator=data$enumerator_name[data$uuid%in%index],
+      state=data[["assessment_state"]][data$uuid%in%index],
+      locality=data[["assessment_locality"]][data$uuid%in%index],
       uuid= index,
       question.name = question.name,
       original.value=oldval,

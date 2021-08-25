@@ -2,6 +2,8 @@ apply_checks<-function(db, dc_method){
   logbook<-data.frame(
     date=character(),
     enumerator= character(),
+    state=character(),
+    locality=character(),
     uuid= character(),
     question.name = character(),
     original.value = character(),
@@ -80,8 +82,8 @@ logbook<- makeslog(data,logbook,"id17",index,"difftime","Survey done in less tha
 index<-pulluuid(data,data$difftime>180)
 logbook<- makeslog(data,logbook,"id18",index,"difftime","Survey took 3 hours to complete")
 
-index<-pulluuid(data,!is.na(data$birth_care)&data$total_women==0)
-logbook<- makeslog(data,logbook,"id19",index,"birth_care","One or more women have given birth, but no woman in HH composition")
+# index<-pulluuid(data,!is.na(data$birth_care)&data$total_women==0)
+# logbook<- makeslog(data,logbook,"id19",index,"birth_care","One or more women have given birth, but no woman in HH composition")
 
 return(logbook)
 }

@@ -2,10 +2,10 @@ Package: MSNAsudan
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Hedi",
-           family = "Ben Mustapha",
+    person(given = "First",
+           family = "Last",
            role = c("aut", "cre"),
-           email = "hedi.benmustapha@msb.tn",
+           email = "first.last@example.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: What the package does (one paragraph).
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
@@ -14,3 +14,13 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Imports: 
+    dplyr,
+    lubridate,
+    pkgload,
+    readr,
+    readxl,
+    shinyjs,
+    composr	
+Depends:
+    shiny
