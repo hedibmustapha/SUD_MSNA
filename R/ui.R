@@ -18,6 +18,7 @@ ui <- shiny::fluidPage(
       shiny::uiOutput("ui.cloglabel"),
       shiny::tags$hr(),
       shiny::uiOutput("ui.db"),
+      shiny::uiOutput("ui.sheetnames"),
       shiny::uiOutput("ui.questionnaire"),
       shiny::uiOutput("ui.choiceslabel"),
       shiny::uiOutput("ui.surveylabel"),

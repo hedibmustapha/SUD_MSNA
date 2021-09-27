@@ -20,6 +20,11 @@ server <- function(input, output, session) {
       shiny::fileInput("data", "DATASET (.csv or .xlsx)", accept = c(".csv",".xlsx",".xls"))
     }
   })
+  output$ui.sheetnames<-renderUI({
+    req(input$data)
+      shiny::selectInput("sheetnames","Name of Sheet",choices = sheets_name(), multiple = F)
+
+  })
   output$ui.questionnaire<-renderUI({
     if(input$action%!in%c(NULL,"")){
       shiny::fileInput("questionnaire", "EXCEL workbook questionnaire", accept = c(".xlsx",".xls"))
@@ -64,7 +69,15 @@ server <- function(input, output, session) {
 
   db <- shiny::reactive({
     shiny::req(input$data)
-    load_file(input$data$name,input$data$datapath) %>% prepdata(.)
+    shiny::req(input$sheetnames)
+    load_file(input$data$name,input$data$datapath, sheet = input$sheetnames) %>% prepdata(.)
+  })
+  sheets_name <- reactive({
+    if (!is.null(input$data)) {
+      return(readxl::excel_sheets(path = input$data$datapath))
+    } else {
+      return(NULL)
+    }
   })
   survey <- shiny::reactive({
     shiny::req(input$questionnaire)

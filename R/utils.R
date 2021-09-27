@@ -39,8 +39,8 @@ label_clog<- function(clog,survey,choices,survey_label,choices_label){
   parent.other.question_label <- match(clog[["parent.other.question"]], survey[["name"]])
   # parent.other.answer_label<-match(clog[["parent.other.answer"]], choices[["name"]])
 
-  old.value_label<-str_split(clog[["original.value"]]," ")
-  old.value_label<-lapply(old.value_label, function(x)match(x, choices[["name"]])) %>%
+  original.value_label<-str_split(clog[["original.value"]]," ")
+  original.value_label<-lapply(original.value_label, function(x)match(x, choices[["name"]])) %>%
     lapply(.,function(x){ifelse(is.na(x),x,choices_label[x])}) %>% lapply(., function(x)paste(x,collapse = " ")) %>% unlist
 
   parent.other.answer_label<-str_split(clog[["parent.other.answer"]]," ")
@@ -49,7 +49,7 @@ label_clog<- function(clog,survey,choices,survey_label,choices_label){
 
   labeled_clog <- clog %>%
     mutate(question.name_label = ifelse(is.na(question.name_label),question.name,survey_label[question.name_label]),
-           old.value_label =ifelse(is.na(old.value_label)|old.value_label=="NA",original.value,old.value_label),
+           original.value_label =ifelse(is.na(original.value_label)|original.value_label=="NA",original.value,original.value_label),
            parent.other.question_label = ifelse(is.na(parent.other.question_label),parent.other.question,survey_label[parent.other.question_label]),
            parent.other.answer_label =ifelse(is.na(parent.other.answer_label)|parent.other.answer_label=="NA",parent.other.answer,parent.other.answer_label)
     )
@@ -60,18 +60,18 @@ label_clog<- function(clog,survey,choices,survey_label,choices_label){
   #          parent.other.question_label = ifelse(is.na(parent.other.question_label),parent.other.question,survey_label[parent.other.question_label])
   #          )
 
-  vars<-c("date","enumerator","state","locality","uuid","question.name","question.name_label","original.value","old.value_label","new.value","parent.other.question","parent.other.question_label","parent.other.answer","parent.other.answer_label")
+  vars<-c("date","enumerator","state","locality","uuid","question.name","question.name_label","original.value","original.value_label","new.value","parent.other.question","parent.other.question_label","parent.other.answer","parent.other.answer_label")
   labeled_clog<-labeled_clog %>% select(all_of(vars),everything())
 
   return(labeled_clog)
 }
 
-load_file <- function(name, path) {
+load_file <- function(name, path, sheetname=1) {
   ext <- tools::file_ext(name)
   switch(ext,
          csv=read.csv(path,stringsAsFactors = F),
-         xlsx=readxl::read_excel(path,1,col_types = "text"),
-         xls=readxl::read_excel(path,1,col_types = "text"),
+         xlsx=readxl::read_excel(path,col_types = "text",sheet = sheetname),
+         xls=readxl::read_excel(path,col_types = "text",sheet = sheetname),
          validate("Invalid file; Please upload a .csv .xlsx or .xls file")
   )
 }

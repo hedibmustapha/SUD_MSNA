@@ -107,10 +107,12 @@ impl_clean<-function(data,uuid,dclean,uuid_log,qmname,newval,oldval,action,other
         } else if(Taction=="recode"){
           X<-as.character(dclean[[uuid_log]][k])
           Y<-as.character(dclean[[othermain]][k])
+          Z<-as.character(dclean[[qmname]][k])
           val<-dclean[[newval]][k]
           data[[Y]]<-as.character(data[[Y]])
           # data[which(data[[uuid]]==X),which(names(data)==Y)]<-as.character(val)
           data[[Y]][which(data[[uuid]]==X)]<-as.character(val)
+          data[[Z]][which(data[[uuid]]==X)]<-NA
 
         # } else if(Taction=="recode_sm"){
         #   X<-as.character(dclean[[uuid_log]][k])
@@ -162,8 +164,8 @@ makeslog<-function(data,logbook,checkid="empty",index,question.name,explanation,
     newlog<-data.frame(
       date=as.character(data$date[data$uuid%in%index]),
       enumerator=data$enumerator_name[data$uuid%in%index],
-      state=data[["assessment_state"]][data$uuid%in%index],
-      locality=data[["assessment_locality"]][data$uuid%in%index],
+      state=data$assessment_state[data$uuid%in%index],
+      locality=data$assessment_locality[data$uuid%in%index],
       uuid= index,
       question.name = question.name,
       original.value=oldval,
